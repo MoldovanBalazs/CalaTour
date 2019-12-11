@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sign_out"
+        android:title="SIGN OUT"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/submenu"
+        android:title=""
+        android:orderInCategory="101"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/resetList"
+                app:showAsAction="always"
+                android:title="Reset list">
+            </item>
+
+            <item
+                android:id="@+id/clearOffers"
+                app:showAsAction="always"
+                android:title="Clear favorites">
+            </item>
+            <item
+                android:id="@+id/chat"
+                app:showAsAction="always"
+                android:title="Chat with us">
+            </item>
+        </menu>
+
+    </item>
+
+</menu>
