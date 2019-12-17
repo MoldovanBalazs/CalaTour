@@ -16,7 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.moldovanbalazs.calatour.adapter.OfferAdapter;
+import com.android.moldovanbalazs.calatour.model.LoginRequest;
 import com.android.moldovanbalazs.calatour.model.Offer;
+import com.android.moldovanbalazs.calatour.network.LoginAPI;
+import com.android.moldovanbalazs.calatour.presenter.LoginPresenter;
+import com.android.moldovanbalazs.calatour.presenter.LogoutPresenter;
 import com.android.moldovanbalazs.calatour.service.OffersService;
 
 public class OffersActivity extends AppCompatActivity {
@@ -91,14 +95,18 @@ public class OffersActivity extends AppCompatActivity {
         int id = item.getItemId();
         if(id == R.id.sign_out) {
             AlertDialog.Builder myDialog = new AlertDialog.Builder ( this );
-            myDialog
-                    .setTitle ( "Confirmation" )
+            myDialog.setTitle ( "Confirmation" )
                     .setMessage ( "Please confirm logout intention!" )
                     .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Intent intent = new Intent(OffersActivity.super.getBaseContext(), MainActivity.class);
                             //startActivity(intent);
+                            LoginRequest loginRequest = new LoginRequest("moldovanbalazs", "moldovanbalazs1234");
+                            Driver driver= (Driver)getApplication();
+                            LogoutPresenter logoutPresenter = new LogoutPresenter(null, driver.getRetrofit().create(LoginAPI.class));
+                            logoutPresenter.logout(loginRequest);
+                            //loginPresenter.login(loginRequest);
                             finish();
                         }
                     })
@@ -162,5 +170,9 @@ public class OffersActivity extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.offers_context_menu, menu);
         }
 
+    }
+
+    public void onLogout() {
+        finish();
     }
 }
